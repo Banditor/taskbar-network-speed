@@ -13,9 +13,19 @@
     notifyBtn: document.getElementById("notifyBtn"),
     runBtn: document.getElementById("runBtn"),
     monitorBtn: document.getElementById("monitorBtn"),
+    advancedToggle: document.getElementById("advancedToggle"),
+    advancedPanel: document.getElementById("advancedPanel"),
     statusMsg: document.getElementById("statusMsg"),
     runsBody: document.getElementById("runsBody"),
     hitPanel: document.getElementById("hitPanel")
+  };
+
+  const DEFAULT_CONFIG = {
+    owner: "Banditor",
+    repo: "pc-help-gifts",
+    branch: "main",
+    workflow: "treasure-monitor.yml",
+    token: ""
   };
 
   const state = {
@@ -29,10 +39,10 @@
 
   function getConfig() {
     return {
-      owner: (el.owner.value || "").trim(),
-      repo: (el.repo.value || "").trim(),
-      branch: (el.branch.value || "main").trim(),
-      workflow: (el.workflow.value || "treasure-monitor.yml").trim(),
+      owner: (el.owner.value || DEFAULT_CONFIG.owner).trim(),
+      repo: (el.repo.value || DEFAULT_CONFIG.repo).trim(),
+      branch: (el.branch.value || DEFAULT_CONFIG.branch).trim(),
+      workflow: (el.workflow.value || DEFAULT_CONFIG.workflow).trim(),
       token: (el.token.value || "").trim()
     };
   }
@@ -45,22 +55,24 @@
   function loadConfig() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const cfg = JSON.parse(raw);
-      el.owner.value = cfg.owner || "";
-      el.repo.value = cfg.repo || "";
-      el.branch.value = cfg.branch || "main";
-      el.workflow.value = cfg.workflow || "treasure-monitor.yml";
+      const cfg = raw ? JSON.parse(raw) : {};
+      el.owner.value = cfg.owner || DEFAULT_CONFIG.owner;
+      el.repo.value = cfg.repo || DEFAULT_CONFIG.repo;
+      el.branch.value = cfg.branch || DEFAULT_CONFIG.branch;
+      el.workflow.value = cfg.workflow || DEFAULT_CONFIG.workflow;
       el.token.value = cfg.token || "";
     } catch (_) {
-      // ignore
+      el.owner.value = DEFAULT_CONFIG.owner;
+      el.repo.value = DEFAULT_CONFIG.repo;
+      el.branch.value = DEFAULT_CONFIG.branch;
+      el.workflow.value = DEFAULT_CONFIG.workflow;
     }
   }
 
   function saveConfig() {
     const cfg = getConfig();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
-    setStatus("ההגדרות נשמרו.", "success");
+    setStatus("הטוקן וההגדרות נשמרו על המכשיר הזה.", "success");
   }
 
   function requireConfig() {
@@ -291,14 +303,20 @@
   function toggleMonitor() {
     state.monitorOn = !state.monitorOn;
     if (state.monitorOn) {
-      el.monitorBtn.textContent = "עצור ניטור רציף";
+      el.monitorBtn.textContent = "עצור ניטור";
       pollIssuesLoop();
       setStatus("ניטור רציף פעיל.", "success");
     } else {
-      el.monitorBtn.textContent = "התחל ניטור רציף";
+      el.monitorBtn.textContent = "ניטור רציף";
       if (state.issueTimer) clearTimeout(state.issueTimer);
       setStatus("ניטור רציף נעצר.", "");
     }
+  }
+
+  function toggleAdvancedPanel() {
+    const isHidden = el.advancedPanel.classList.contains("hidden");
+    el.advancedPanel.classList.toggle("hidden", !isHidden);
+    el.advancedToggle.textContent = isHidden ? "הסתר הגדרות מתקדמות" : "הגדרות מתקדמות";
   }
 
   async function requestNotificationPermission() {
@@ -343,6 +361,7 @@
       setStatus(String(error.message || error), "error");
     }
   });
+  el.advancedToggle.addEventListener("click", toggleAdvancedPanel);
 
   loadConfig();
   refreshRuns();

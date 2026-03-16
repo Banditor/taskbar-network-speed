@@ -15,6 +15,8 @@
     "treasure:scan": "node scripts/treasure-hunt/runner.mjs scan --open-on-hit",
     "treasure:watch": "node scripts/treasure-hunt/runner.mjs watch --interval=12 --open-on-hit",
     "treasure:watch:live": "node scripts/treasure-hunt/runner.mjs watch --interval=8 --open-on-hit --keep-running",
+    "treasure:turbo": "node scripts/treasure-hunt/turbo-hunter.mjs",
+    "treasure:turbo:live": "node scripts/treasure-hunt/turbo-hunter.mjs --duration=900 --keep-running",
     "treasure:ci-report": "node scripts/treasure-hunt/ci-report.mjs"
   },
   "dependencies": {

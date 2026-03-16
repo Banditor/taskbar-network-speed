@@ -21,38 +21,59 @@
 
   <main class="container">
     <section class="card">
-      <h2>הגדרות GitHub</h2>
+      <h2>הפעלה מהירה</h2>
       <div class="grid">
-        <div class="col-4">
-          <label for="owner">Owner</label>
-          <input id="owner" placeholder="your-github-user-or-org" />
-        </div>
-        <div class="col-4">
-          <label for="repo">Repository</label>
-          <input id="repo" placeholder="repo-name" />
-        </div>
-        <div class="col-4">
-          <label for="branch">Branch</label>
-          <input id="branch" value="main" />
+        <div class="col-12 quick-note">
+          פעם אחת שומרים טוקן. אחרי זה פשוט פותחים את הדף ולוחצים על הכפתור הגדול.
         </div>
 
         <div class="col-6">
-          <label for="workflow">Workflow File</label>
-          <input id="workflow" value="treasure-monitor.yml" />
-        </div>
-        <div class="col-6">
           <label for="token">GitHub Token (PAT)</label>
-          <input id="token" type="password" autocomplete="off" placeholder="ghp_..." />
+          <input id="token" type="password" autocomplete="off" placeholder="הדבק כאן את הטוקן פעם אחת" />
+        </div>
+
+        <div class="col-6 quick-status">
+          <div class="mini-card">
+            <div class="mini-label">Repository</div>
+            <div class="mini-value">Banditor / pc-help-gifts</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-label">Workflow</div>
+            <div class="mini-value">treasure-monitor.yml</div>
+          </div>
         </div>
 
         <div class="col-12">
-          <div class="actions">
-            <button id="saveBtn" type="button">שמור הגדרות</button>
+          <div class="actions hero-actions">
+            <button id="runBtn" class="btn-ok btn-large" type="button">הפעל עכשיו</button>
+            <button id="monitorBtn" class="btn-secondary" type="button">ניטור רציף</button>
             <button id="notifyBtn" class="btn-secondary" type="button">אפשר התראות</button>
-            <button id="runBtn" class="btn-ok" type="button">Run Now</button>
-            <button id="monitorBtn" class="btn-secondary" type="button">התחל ניטור רציף</button>
+            <button id="saveBtn" type="button">שמור טוקן</button>
+            <button id="advancedToggle" class="btn-secondary" type="button">הגדרות מתקדמות</button>
           </div>
           <div id="statusMsg" class="message"></div>
+        </div>
+
+        <div id="advancedPanel" class="col-12 advanced-panel hidden">
+          <div class="grid">
+            <div class="col-4">
+              <label for="owner">Owner</label>
+              <input id="owner" placeholder="your-github-user-or-org" value="Banditor" />
+            </div>
+            <div class="col-4">
+              <label for="repo">Repository</label>
+              <input id="repo" placeholder="repo-name" value="pc-help-gifts" />
+            </div>
+            <div class="col-4">
+              <label for="branch">Branch</label>
+              <input id="branch" value="main" />
+            </div>
+
+            <div class="col-12">
+              <label for="workflow">Workflow File</label>
+              <input id="workflow" value="treasure-monitor.yml" />
+            </div>
+          </div>
         </div>
       </div>
     </section>

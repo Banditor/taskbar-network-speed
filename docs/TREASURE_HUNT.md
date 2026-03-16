@@ -38,6 +38,12 @@ Behavior:
 - `npm run treasure:watch:live`  
   Aggressive loop (keeps running after hit).
 
+- `npm run treasure:turbo`  
+  Opens a persistent hot browser session on the highest-probability routes and listens in real time for new images, overlays, asset requests, and DOM mutations.
+
+- `npm run treasure:turbo:live`  
+  Extended live-hunt mode. This is now the preferred command during a real giveaway race.
+
 - `node scripts/treasure-hunt/runner.mjs scan --full --open-on-hit`  
   Full deep scan (slower) with screenshots.
 
@@ -76,6 +82,21 @@ Recommended:
 
 1. In GitHub repo settings, enable notifications for workflow failures and issues.
 2. Keep this workflow active even when your local machine is offline.
+
+## Recommended Race Setup
+
+For the next live event:
+
+```bash
+npm run treasure:turbo:live
+```
+
+Why this is faster:
+
+- Keeps a single Playwright browser warm instead of reopening pages every cycle.
+- Watches only the hottest routes.
+- Uses DOM mutation hooks and request capture instead of waiting for broad rescans.
+- Saves a hit file and tries to open the top targets immediately.
 
 ## Mobile UI (GitHub Pages)
 

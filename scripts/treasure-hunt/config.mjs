@@ -29,6 +29,18 @@
     "/offers",
     "/"
   ],
+  hotRoutes: [
+    "/giveaway",
+    "/offers",
+    "/glossary/intraday-stop",
+    "/glossary",
+    "/company/fundednext",
+    "/company/top-one-futures"
+  ],
+  turboPollMs: Number(process.env.TREASURE_TURBO_POLL_MS || 1200),
+  turboDurationSec: Number(process.env.TREASURE_TURBO_DURATION_SEC || 180),
+  turboWarmWaitMs: Number(process.env.TREASURE_TURBO_WARM_WAIT_MS || 2000),
+  turboStepWaitMs: Number(process.env.TREASURE_TURBO_STEP_WAIT_MS || 450),
   suspiciousKeywords: [
     "gift",
     "present",

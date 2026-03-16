@@ -78,6 +78,13 @@ button:hover, .btn:hover { background: var(--primary-hover); }
 .btn-danger { background: var(--danger); }
 .btn-ok { background: var(--ok); }
 .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-actions { align-items: center; }
+.btn-large {
+  min-width: 220px;
+  min-height: 54px;
+  font-size: 18px;
+  font-weight: 700;
+}
 .message { margin-top: 8px; min-height: 20px; font-size: 14px; }
 .message.error { color: #b42318; }
 .message.success { color: #067647; }
@@ -139,8 +146,45 @@ th, td {
   border-radius: 8px;
   border: 1px solid var(--border);
 }
-@media (max-width: 900px) {
-  .col-4, .col-6, .col-8 { grid-column: span 12; }
+
+.quick-note {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.quick-status {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mini-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #f7faff);
+  padding: 12px;
+}
+
+.mini-label {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.mini-value {
+  font-weight: 700;
+  direction: ltr;
+  text-align: left;
+}
+
+.advanced-panel {
+  margin-top: 8px;
+  border-top: 1px dashed var(--border);
+  padding-top: 14px;
+}
+
+.hidden {
+  display: none;
 }
 
 .result-panel {
@@ -163,4 +207,10 @@ th, td {
 #runsBody td:nth-child(3) {
   max-width: 420px;
   white-space: normal;
+}
+
+@media (max-width: 900px) {
+  .col-4, .col-6, .col-8 { grid-column: span 12; }
+  .quick-status { grid-template-columns: 1fr; }
+  .btn-large { width: 100%; }
 }
