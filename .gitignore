@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Treasure hunt local state
+.treasure-hunt/
+tmp_*
+data.db
+~$*.xlsx

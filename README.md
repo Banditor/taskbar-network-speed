@@ -37,3 +37,42 @@ npm run preview
 - `VITE_SUPABASE_PUBLISHABLE_KEY`
 
 אם צריך, עדכן את הערכים בקובץ `.env`.
+## תשתית "חפש את המטמון" (מהיר)
+
+הרצה ראשונית:
+
+```bash
+npm install
+npx playwright install chromium
+npm run treasure:init
+```
+
+מצב תחרות מהיר:
+
+```bash
+npm run treasure:watch
+```
+
+לסריקה מלאה (איטית יותר, עם צילומי מסך):
+
+```bash
+node scripts/treasure-hunt/runner.mjs scan --full --open-on-hit
+```
+
+תיעוד מלא:
+- `docs/TREASURE_HUNT.md`
+
+## גיבוי דרך GitHub (כשלא ליד המחשב)
+
+נוסף Workflow אוטומטי:
+- `.github/workflows/treasure-monitor.yml`
+
+מה הוא עושה:
+- רץ כל 5 דקות אוטומטית.
+- מעלה ארטיפקטים עם תוצאות הסריקה.
+- יוצר Issue אם נמצא HIT.
+- מסמן את הריצה כ-FAILED על HIT כדי לבלוט בהתראות.
+
+הפעלה ידנית:
+1. GitHub -> Actions -> Treasure Monitor
+2. Run workflow

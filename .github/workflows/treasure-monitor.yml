@@ -1,0 +1,101 @@
+﻿name: Treasure Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: treasure-monitor
+  cancel-in-progress: true
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Restore Baseline Cache
+        id: baseline_restore
+        uses: actions/cache/restore@v4
+        with:
+          path: .treasure-hunt/baseline.json
+          key: treasure-baseline-${{ github.run_id }}
+          restore-keys: |
+            treasure-baseline-
+
+      - name: Ensure Output Directories
+        run: |
+          mkdir -p .treasure-hunt/hits
+          mkdir -p .treasure-hunt/shots
+
+      - name: Run Treasure Scan
+        env:
+          TREASURE_BASE_URL: https://propfirmpayless.com
+          TREASURE_QUICK_DYNAMIC_WAIT_MS: 1100
+          TREASURE_QUICK_LONG_WAIT_MS: 1700
+          TREASURE_QUICK_MAX_PAGES: 18
+          TREASURE_PAGE_CONCURRENCY: 8
+          TREASURE_ASSET_CONCURRENCY: 10
+          TREASURE_FETCH_TIMEOUT_MS: 20000
+        run: node scripts/treasure-hunt/runner.mjs scan --update-baseline
+
+      - name: Build CI Summary
+        id: report
+        run: npm run treasure:ci-report
+
+      - name: Upload Treasure Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: treasure-monitor-${{ github.run_id }}
+          path: .treasure-hunt/
+          retention-days: 7
+
+      - name: Save Baseline Cache
+        if: always() && hashFiles('.treasure-hunt/baseline.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .treasure-hunt/baseline.json
+          key: treasure-baseline-${{ github.run_id }}
+
+      - name: Create Issue On HIT
+        if: steps.report.outputs.hit_found == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('.treasure-hunt/ci-summary.md', 'utf8');
+            const title = `[Treasure HIT] ${new Date().toISOString()} (run #${context.runNumber})`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['treasure-alert', 'automation']
+            });
+
+      - name: Mark Workflow Failed On HIT
+        if: steps.report.outputs.hit_found == 'true'
+        run: |
+          echo "Treasure HIT detected. Failing run for visibility."
+          exit 1

@@ -10,7 +10,12 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "treasure:init": "node scripts/treasure-hunt/runner.mjs init",
+    "treasure:scan": "node scripts/treasure-hunt/runner.mjs scan --open-on-hit",
+    "treasure:watch": "node scripts/treasure-hunt/runner.mjs watch --interval=12 --open-on-hit",
+    "treasure:watch:live": "node scripts/treasure-hunt/runner.mjs watch --interval=8 --open-on-hit --keep-running",
+    "treasure:ci-report": "node scripts/treasure-hunt/ci-report.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -81,6 +86,7 @@
     "globals": "^15.15.0",
     "jsdom": "^20.0.3",
     "lovable-tagger": "^1.1.13",
+    "playwright": "^1.53.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",

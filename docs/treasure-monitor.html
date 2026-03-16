@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treasure Monitor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <div class="brand">Treasure Monitor</div>
+        <div class="muted">הפעלה מהפלאפון: Run Now + התראה אוטומטית על HIT</div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html">חזרה</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>הגדרות GitHub</h2>
+      <div class="grid">
+        <div class="col-4">
+          <label for="owner">Owner</label>
+          <input id="owner" placeholder="your-github-user-or-org" />
+        </div>
+        <div class="col-4">
+          <label for="repo">Repository</label>
+          <input id="repo" placeholder="repo-name" />
+        </div>
+        <div class="col-4">
+          <label for="branch">Branch</label>
+          <input id="branch" value="main" />
+        </div>
+
+        <div class="col-6">
+          <label for="workflow">Workflow File</label>
+          <input id="workflow" value="treasure-monitor.yml" />
+        </div>
+        <div class="col-6">
+          <label for="token">GitHub Token (PAT)</label>
+          <input id="token" type="password" autocomplete="off" placeholder="ghp_..." />
+        </div>
+
+        <div class="col-12">
+          <div class="actions">
+            <button id="saveBtn" type="button">שמור הגדרות</button>
+            <button id="notifyBtn" class="btn-secondary" type="button">אפשר התראות</button>
+            <button id="runBtn" class="btn-ok" type="button">Run Now</button>
+            <button id="monitorBtn" class="btn-secondary" type="button">התחל ניטור רציף</button>
+          </div>
+          <div id="statusMsg" class="message"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>סטטוס ריצה</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Run #</th>
+              <th>סטטוס</th>
+              <th>סיכום</th>
+              <th>עודכן</th>
+              <th>קישור</th>
+            </tr>
+          </thead>
+          <tbody id="runsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>תוצאה אחרונה</h2>
+      <div id="hitPanel" class="result-panel">
+        <p class="muted">עדיין אין HIT חדש.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="treasure-monitor.js"></script>
+</body>
+</html>
