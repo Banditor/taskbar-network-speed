@@ -1,0 +1,5 @@
+*.obj
+*.res
+*.pdb
+history.tsv
+history.tsv.tmp
