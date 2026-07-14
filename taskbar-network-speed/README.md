@@ -6,7 +6,7 @@ Taskbar Network Speed is a small native Windows utility that shows current netwo
 
 ## Download
 
-Download the latest ready-to-run package from the [Releases page](https://github.com/Banditor/pc-help-gifts/releases/latest). Extract `TaskbarNetworkSpeed.exe` and run it. The utility can start with Windows from its right-click menu.
+Download the latest ready-to-run package from the [Releases page](https://github.com/Banditor/taskbar-network-speed/releases/latest). Extract `TaskbarNetworkSpeed.exe` and run it. The utility can start with Windows from its right-click menu.
 
 ## Features
 
@@ -37,7 +37,7 @@ Taskbar Network Speed הוא כלי Win32 קטן שמציג את תעבורת ה
 - קליק ימני פועל בכל שטח התצוגה, גם בשטח הריק סביב הטקסט.
 - אין חלון צף ואין שירות רקע נפרד.
 
-להורדה, יש להיכנס ל־[Releases](https://github.com/Banditor/pc-help-gifts/releases/latest), להוריד את הגרסה האחרונה ולהפעיל את `TaskbarNetworkSpeed.exe`.
+להורדה, יש להיכנס ל־[Releases](https://github.com/Banditor/taskbar-network-speed/releases/latest), להוריד את הגרסה האחרונה ולהפעיל את `TaskbarNetworkSpeed.exe`.
 
 ## Attribution and license
 

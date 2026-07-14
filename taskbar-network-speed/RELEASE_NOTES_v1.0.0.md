@@ -12,7 +12,7 @@ Highlights:
 - professional application icon embedded in the Windows executable;
 - local-only history storage with no account and no telemetry.
 
-![Taskbar Network Speed on the Windows taskbar](https://raw.githubusercontent.com/Banditor/pc-help-gifts/v1.0.0/taskbar-network-speed/assets/taskbar-network-speed-taskbar.png)
+![Taskbar Network Speed on the Windows taskbar](https://raw.githubusercontent.com/Banditor/taskbar-network-speed/v1.0.0/taskbar-network-speed/assets/taskbar-network-speed-taskbar.png)
 
 ## עברית
 
